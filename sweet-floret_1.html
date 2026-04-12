@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Floret — Sales & Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F7F2EB;
+    --cream: #EFE5D8;
+    --espresso: #2F241F;
+    --taupe: #B8A79A;
+    --sage: #A8B2A1;
+    --plum: #5A3143;
+    --gold: #B8905A;
+    --gold-light: #D4AA7A;
+    --white: #FDFAF6;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ivory);
+    color: var(--espresso);
+    overflow-x: hidden;
+    font-weight: 300;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  h1, h2, h3, h4, .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 5vw;
+    background: rgba(247, 242, 235, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184, 167, 154, 0.2);
+    transition: all 0.4s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--espresso);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--espresso);
+    padding: 0.7rem 1.6rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  .nav-cta:hover { background: var(--plum); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vw 5vw 6vw 8vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-size: clamp(2.8rem, 4.5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--espresso);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--plum);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--espresso);
+    opacity: 0;
+    max-width: 480px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--espresso);
+    padding: 1rem 2.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--plum);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  .btn-primary:hover::after { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-secondary {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    text-decoration: none;
+    border-bottom: 1px solid var(--taupe);
+    padding-bottom: 2px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+  .btn-secondary::after { content: '→'; }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.3s forwards;
+  }
+
+  .hero-image-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, var(--cream) 0%, #D4C4B0 50%, #C4A882 100%);
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 4rem;
+  }
+
+  /* Decorative pastry illustration */
+  .pastry-art {
+    width: 100%;
+    max-width: 380px;
+    opacity: 0.9;
+  }
+
+  .hero-detail {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    white-space: nowrap;
+  }
+
+  /* ─── SECTION UTILITIES ─── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-headline {
+    font-size: clamp(2rem, 3.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--espresso);
+    margin-bottom: 1.5rem;
+  }
+  .section-headline em { font-style: italic; color: var(--plum); }
+
+  /* ─── VALUE PILLARS ─── */
+  .pillars {
+    padding: 7rem 0;
+    background: var(--espresso);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillars::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 60px;
+    background: var(--ivory);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+  }
+
+  .pillar-card {
+    padding: 3rem 2.5rem;
+    border-left: 1px solid rgba(184, 144, 90, 0.2);
+    position: relative;
+    transition: background 0.4s ease;
+    cursor: default;
+  }
+  .pillar-card:first-child { border-left: none; }
+  .pillar-card:hover { background: rgba(184, 144, 90, 0.06); }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(184, 144, 90, 0.2);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ivory);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .pillar-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(247, 242, 235, 0.5);
+    font-weight: 300;
+  }
+
+  .pillars .section-eyebrow { color: var(--gold); }
+  .pillars .section-headline { color: var(--ivory); }
+
+  /* ─── WHY SWEET FLORET ─── */
+  .why {
+    padding: 8rem 0;
+    background: var(--cream);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: center;
+  }
+
+  .why-visual {
+    position: relative;
+    height: 560px;
+    overflow: hidden;
+  }
+
+  .why-visual-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #C9B49A 0%, #A8917A 40%, #8B7260 100%);
+  }
+
+  .why-visual-accent {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--gold);
+    opacity: 0.4;
+  }
+
+  .why-visual-text {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    right: 2.5rem;
+  }
+
+  .why-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  .why-quote-attr {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .why-content { padding-right: 2rem; }
+
+  .why-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--espresso);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(184, 167, 154, 0.3);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--plum);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--espresso);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    padding: 8rem 0;
+    background: var(--ivory);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+
+  .services-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--espresso);
+    opacity: 0.75;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(184, 167, 154, 0.2);
+  }
+
+  .service-card {
+    background: var(--ivory);
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--white); }
+  .service-card:hover .service-arrow { transform: translateX(6px); opacity: 1; }
+  .service-card:hover .service-num { opacity: 1; color: var(--plum); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--taupe);
+    opacity: 0.5;
+    margin-bottom: 1.8rem;
+    transition: all 0.4s ease;
+    letter-spacing: 0.1em;
+  }
+
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--espresso);
+    opacity: 0.65;
+    margin-bottom: 2rem;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .service-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--plum);
+    background: rgba(90, 49, 67, 0.08);
+    padding: 0.3rem 0.8rem;
+  }
+
+  .service-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+  .service-link:hover { opacity: 1; }
+
+  .service-arrow {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
+  }
+
+  /* ─── INDUSTRIES ─── */
+  .industries {
+    padding: 8rem 0;
+    background: var(--espresso);
+  }
+
+  .industries .section-eyebrow { color: var(--gold); }
+  .industries .section-headline { color: var(--ivory); }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 4rem;
+  }
+
+  .industry-item {
+    padding: 2.5rem;
+    background: var(--espresso);
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .industry-item:hover { background: rgba(184, 144, 90, 0.1); }
+
+  .industry-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .industry-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 0.4rem;
+  }
+
+  .industry-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(247, 242, 235, 0.45);
+  }
+
+  /* ─── FOUNDER ─── */
+  .founder {
+    padding: 8rem 0;
+    background: var(--cream);
+  }
+
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8vw;
+    align-items: center;
+  }
+
+  .founder-image-wrap {
+    position: relative;
+  }
+
+  .founder-image {
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #C4A882 0%, #9C7E5C 60%, #6B5240 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .founder-image-placeholder {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.2em;
+    user-select: none;
+  }
+
+  .founder-credential {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    background: rgba(47, 36, 31, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 1.2rem 1.5rem;
+  }
+
+  .founder-cred-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .founder-cred-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ivory);
+    font-style: italic;
+  }
+
+  .founder-accent {
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--gold);
+    opacity: 0.3;
+    z-index: -1;
+  }
+
+  .founder-content { padding-left: 2rem; }
+
+  .founder-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--espresso);
+    margin-bottom: 0.3rem;
+  }
+
+  .founder-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+  }
+
+  .founder-bio {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--espresso);
+    opacity: 0.75;
+    margin-bottom: 1.2rem;
+  }
+
+  .founder-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(184, 167, 154, 0.3);
+  }
+
+  .founder-highlight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--espresso);
+    opacity: 0.7;
+  }
+  .founder-highlight::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ─── PROCESS ─── */
+  .process {
+    padding: 8rem 0;
+    background: var(--ivory);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 5rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2.2rem;
+    left: 3rem;
+    right: 3rem;
+    height: 1px;
+    background: linear-gradient(to right, var(--taupe), var(--gold), var(--taupe));
+    opacity: 0.4;
+  }
+
+  .process-step {
+    padding: 0 2rem;
+    padding-top: 0;
+  }
+
+  .step-num-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--taupe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--espresso);
+    background: var(--ivory);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  .process-step:hover .step-num {
+    background: var(--plum);
+    border-color: var(--plum);
+    color: var(--white);
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 0.8rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: var(--espresso);
+    opacity: 0.6;
+  }
+
+  /* ─── TEAM ─── */
+  .team {
+    padding: 8rem 0;
+    background: var(--cream);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 4.5rem;
+  }
+
+  .team-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-card:hover .team-card-bio { opacity: 1; transform: translateY(0); }
+
+  .team-photo {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-photo-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .team-photo-bg.p1 { background: linear-gradient(160deg, #C4A882 0%, #9C7E5C 60%, #7A5E44 100%); }
+  .team-photo-bg.p2 { background: linear-gradient(160deg, #B8A8A0 0%, #8E7870 60%, #6A5450 100%); }
+  .team-photo-bg.p3 { background: linear-gradient(160deg, #A8B2A1 0%, #7E8C78 60%, #5A6855 100%); }
+
+  .team-photo-initials {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.15em;
+  }
+
+  .team-card-bio {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: rgba(47, 36, 31, 0.9);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s ease;
+  }
+
+  .team-bio-text {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgba(247, 242, 235, 0.8);
+  }
+
+  .team-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 0.2rem;
+  }
+
+  .team-role {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ─── TRUST ─── */
+  .trust {
+    padding: 7rem 0;
+    background: var(--ivory);
+    border-top: 1px solid rgba(184, 167, 154, 0.2);
+  }
+
+  .trust-inner {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .trust-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 3rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(184, 167, 154, 0.15);
+    margin-top: 4rem;
+  }
+
+  .testimonial {
+    background: var(--ivory);
+    padding: 3rem;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--espresso);
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .testimonial-author {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--taupe);
+  }
+  .testimonial-author strong {
+    display: block;
+    color: var(--espresso);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-size: 0.88rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+  }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    padding: 10rem 0;
+    background: var(--espresso);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: 'SF';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40vw;
+    font-weight: 300;
+    color: rgba(255,255,255,0.02);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+  }
+
+  .final-cta .section-eyebrow {
+    justify-content: center;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .final-cta .section-eyebrow::before { display: none; }
+
+  .final-cta .section-headline { color: var(--ivory); text-align: center; margin-bottom: 1.5rem; }
+
+  .final-cta-sub {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(247, 242, 235, 0.5);
+    max-width: 520px;
+    margin: 0 auto 3rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #1E1610;
+    padding: 5rem 5vw 3rem;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .footer-brand span { color: var(--gold); }
+
+  .footer-tagline {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: rgba(247, 242, 235, 0.35);
+    max-width: 240px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .footer-col-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: rgba(247, 242, 235, 0.45);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer-links a:hover { color: var(--ivory); }
+
+  .footer-contact-item {
+    font-size: 0.85rem;
+    color: rgba(247, 242, 235, 0.45);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  .footer-contact-item a {
+    color: rgba(247, 242, 235, 0.45);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer-contact-item a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2.5rem;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(247, 242, 235, 0.2);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-closer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(184, 144, 90, 0.5);
+  }
+
+  /* ─── DIVIDER ─── */
+  .gold-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+    opacity: 0.5;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── SCROLL INDICATOR ─── */
+  .scroll-line {
+    position: absolute;
+    bottom: 3rem;
+    left: 8vw;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+  }
+
+  .scroll-line-bar {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--espresso));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  .scroll-line-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    opacity: 0.4;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* ─── CONTACT SECTION ─── */
+  .contact {
+    padding: 8rem 0;
+    background: var(--ivory);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: center;
+  }
+
+  .contact-info h2 {
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--taupe);
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: var(--cream);
+    border: 1px solid rgba(184, 167, 154, 0.3);
+    padding: 0.9rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--espresso);
+    outline: none;
+    transition: border-color 0.3s ease;
+    appearance: none;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: var(--gold);
+  }
+
+  .form-field textarea { resize: vertical; min-height: 120px; }
+
+  .contact-details {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(184, 167, 154, 0.25);
+  }
+
+  .contact-detail-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: baseline;
+  }
+
+  .contact-detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    min-width: 60px;
+  }
+
+  .contact-detail-value {
+    font-size: 0.9rem;
+    color: var(--espresso);
+    opacity: 0.75;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { display: none; }
+    .hero-content { padding: 8rem 5vw 5rem; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid, .founder-grid, .contact-grid { grid-template-columns: 1fr; }
+    .why-visual, .founder-image-wrap { display: none; }
+    .services-header { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .industries-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar-card { border-left: none; border-top: 1px solid rgba(184,144,90,0.2); }
+    .pillar-card:first-child { border-top: none; }
+    .process-steps { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .industries-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-headline { font-size: 2.5rem; }
+    .why-stats { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Sweet <span>Floret</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Vancouver, BC — Consulting</div>
+    <h1 class="hero-headline">
+      Strategic Growth for<br>
+      <em>Bakeries, Food Brands,</em><br>
+      and Retail Teams
+    </h1>
+    <p class="hero-sub">Sweet Floret helps food businesses elevate product strategy, optimize operations, strengthen sales performance, and build systems that support long-term growth.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary"><span>Book a Consultation</span></a>
+      <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+    <div class="scroll-line">
+      <div class="scroll-line-bar"></div>
+      <div class="scroll-line-text">Scroll</div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-bg"></div>
+    <div class="hero-image-overlay">
+      <!-- Decorative SVG representing elegant pastry/bakery -->
+      <svg class="pastry-art" viewBox="0 0 360 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Elegant tart form -->
+        <ellipse cx="180" cy="300" rx="140" ry="30" fill="rgba(47,36,31,0.2)"/>
+        <path d="M50 280 Q50 200 180 200 Q310 200 310 280 L310 300 Q310 340 180 340 Q50 340 50 300 Z" fill="rgba(212, 170, 122, 0.6)" stroke="rgba(184,144,90,0.4)" stroke-width="1"/>
+        <!-- Tart filling -->
+        <ellipse cx="180" cy="270" rx="110" ry="22" fill="rgba(90,49,67,0.5)"/>
+        <!-- Decorative fruit/berry elements -->
+        <circle cx="160" cy="258" r="14" fill="rgba(90,49,67,0.8)" stroke="rgba(184,144,90,0.3)" stroke-width="1"/>
+        <circle cx="195" cy="254" r="11" fill="rgba(90,49,67,0.7)" stroke="rgba(184,144,90,0.3)" stroke-width="1"/>
+        <circle cx="225" cy="260" r="13" fill="rgba(90,49,67,0.75)" stroke="rgba(184,144,90,0.3)" stroke-width="1"/>
+        <circle cx="148" cy="272" r="9" fill="rgba(90,49,67,0.6)"/>
+        <circle cx="210" cy="272" r="8" fill="rgba(90,49,67,0.6)"/>
+        <!-- Leaf accents -->
+        <path d="M170 245 Q175 230 185 235" stroke="rgba(168,178,161,0.7)" stroke-width="1.5" fill="none"/>
+        <path d="M200 242 Q205 228 215 233" stroke="rgba(168,178,161,0.7)" stroke-width="1.5" fill="none"/>
+        <!-- Tart rim -->
+        <path d="M50 280 Q50 300 180 300 Q310 300 310 280" fill="none" stroke="rgba(212,170,122,0.5)" stroke-width="2"/>
+        <!-- Decorative lines — ruler/precision feel -->
+        <line x1="40" y1="160" x2="40" y2="340" stroke="rgba(184,144,90,0.15)" stroke-width="1"/>
+        <line x1="320" y1="160" x2="320" y2="340" stroke="rgba(184,144,90,0.15)" stroke-width="1"/>
+        <!-- Floral element above tart -->
+        <circle cx="180" cy="150" r="40" fill="none" stroke="rgba(184,144,90,0.2)" stroke-width="1"/>
+        <circle cx="180" cy="150" r="28" fill="none" stroke="rgba(184,144,90,0.15)" stroke-width="1"/>
+        <!-- Petal-like shapes -->
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.3)" transform="rotate(0 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(45 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(90 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(135 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(180 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(225 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(270 180 150)"/>
+        <ellipse cx="180" cy="120" rx="10" ry="20" fill="rgba(184,144,90,0.25)" transform="rotate(315 180 150)"/>
+        <!-- Center of flower -->
+        <circle cx="180" cy="150" r="8" fill="rgba(184,144,90,0.5)"/>
+        <!-- Fine text detail -->
+        <text x="180" y="390" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="rgba(255,255,255,0.25)" letter-spacing="4">VANCOUVER · EST. 2024</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PILLARS -->
+<section class="pillars">
+  <div class="section-inner">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-headline">Four Disciplines.<br><em>One Integrated Approach.</em></h2>
+    <div class="pillars-grid reveal">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Commercial Strategy</div>
+        <p class="pillar-desc">Revenue forecasting, market positioning, pricing architecture, and channel strategy built around your specific growth objectives.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Product & Innovation</div>
+        <p class="pillar-desc">Market-aligned product development that connects culinary creativity with customer demand and commercial viability.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Operational Excellence</div>
+        <p class="pillar-desc">Streamlined production systems, labor efficiency, and cost structures designed to support sustainable, scalable operations.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Quality & Food Safety</div>
+        <p class="pillar-desc">Audit-ready compliance frameworks, documentation systems, labeling standards, and team training that protect your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SWEET FLORET -->
+<section class="why" id="about">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-visual reveal">
+        <div class="why-visual-bg"></div>
+        <div class="why-accent"></div>
+        <div class="why-visual-text">
+          <div class="why-quote">"We help food businesses grow beautifully and intelligently."</div>
+          <div class="why-quote-attr">Sweet Floret — Core Principle</div>
+        </div>
+      </div>
+      <div class="why-content reveal">
+        <div class="section-eyebrow">Our Difference</div>
+        <h2 class="section-headline">Where Culinary Expertise Meets <em>Commercial Discipline</em></h2>
+        <div class="gold-divider"></div>
+        <p class="why-body">Most consulting firms understand business. Most culinary experts understand product. Sweet Floret operates at the intersection — bringing classically trained pastry expertise, sales leadership, food safety rigour, and operational experience to every engagement.</p>
+        <p class="why-body">We work with growth-oriented food businesses that want more than advice. They want a capable partner who has built teams, launched products, navigated compliance, and driven revenue across retail, manufacturing, and hospitality environments.</p>
+        <div class="why-stats">
+          <div class="stat">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Years Industry Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Core Disciplines</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Industries Served</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Senior Specialists</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-eyebrow">Our Services</div>
+        <h2 class="section-headline">Expertise Built for<br><em>Food Businesses</em></h2>
+      </div>
+      <p class="services-intro">Each engagement is structured around your specific goals — whether that's entering new markets, tightening operations, launching a product line, or achieving compliance readiness.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">Service 01</div>
+        <div class="service-title">Sales Strategy & Commercial Planning</div>
+        <p class="service-desc">We build data-informed sales strategies that align your team, channels, and resources around realistic, measurable growth targets.</p>
+        <div class="service-tags">
+          <span class="service-tag">Revenue Forecasting</span>
+          <span class="service-tag">Budget Planning</span>
+          <span class="service-tag">Promotions</span>
+          <span class="service-tag">Market Growth</span>
+        </div>
+        <a href="#contact" class="service-link">Explore this service <span class="service-arrow">→</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Service 02</div>
+        <div class="service-title">Product Innovation & Market Alignment</div>
+        <p class="service-desc">From concept to commercialization — we develop products grounded in customer insight, trend analysis, and production reality.</p>
+        <div class="service-tags">
+          <span class="service-tag">R&D Direction</span>
+          <span class="service-tag">Menu Development</span>
+          <span class="service-tag">Trend Alignment</span>
+          <span class="service-tag">Costing</span>
+        </div>
+        <a href="#contact" class="service-link">Explore this service <span class="service-arrow">→</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Service 03</div>
+        <div class="service-title">Operational Optimization</div>
+        <p class="service-desc">We identify inefficiencies across production, labor, and supply chain — then implement systems that reduce cost and improve consistency.</p>
+        <div class="service-tags">
+          <span class="service-tag">Process Improvement</span>
+          <span class="service-tag">Labor Efficiency</span>
+          <span class="service-tag">Costing Models</span>
+          <span class="service-tag">Workflow Design</span>
+        </div>
+        <a href="#contact" class="service-link">Explore this service <span class="service-arrow">→</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Service 04</div>
+        <div class="service-title">Food Safety & Quality Consulting</div>
+        <p class="service-desc">Audit preparation, HACCP documentation, labeling compliance, and frontline team training — built to protect your reputation and license to operate.</p>
+        <div class="service-tags">
+          <span class="service-tag">Audits</span>
+          <span class="service-tag">HACCP</span>
+          <span class="service-tag">Labeling</span>
+          <span class="service-tag">Team Training</span>
+        </div>
+        <a href="#contact" class="service-link">Explore this service <span class="service-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Who We Serve</div>
+      <h2 class="section-headline">Built for the<br><em>Food Industry</em></h2>
+    </div>
+    <div class="industries-grid reveal">
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">Retail Bakeries</div>
+          <p class="industry-desc">Independent and multi-location operations looking to scale sustainably with strong margins and consistent quality.</p>
+        </div>
+      </div>
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">In-Store Grocery Bakeries</div>
+          <p class="industry-desc">Supermarket and grocery bakery departments seeking product development, staff training, and sales strategy support.</p>
+        </div>
+      </div>
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">Food Manufacturers</div>
+          <p class="industry-desc">Production-focused businesses navigating compliance, efficiency, and retail channel expansion.</p>
+        </div>
+      </div>
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">Hospitality Groups</div>
+          <p class="industry-desc">Hotels and resorts elevating their food programs through curated bakery concepts and operational structure.</p>
+        </div>
+      </div>
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">Emerging Food Brands</div>
+          <p class="industry-desc">Early-stage brands scaling from artisan to commercial with the right systems, strategy, and structure in place.</p>
+        </div>
+      </div>
+      <div class="industry-item">
+        <div class="industry-dot"></div>
+        <div>
+          <div class="industry-name">Multi-Location Operations</div>
+          <p class="industry-desc">Expanding chains requiring standardized processes, training frameworks, and cohesive quality control across sites.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="section-inner">
+    <div class="founder-grid">
+      <div class="founder-image-wrap reveal">
+        <div class="founder-image">
+          <div class="founder-image-placeholder">FH</div>
+          <div class="founder-credential">
+            <div class="founder-cred-label">Education</div>
+            <div class="founder-cred-text">Le Cordon Bleu, Paris</div>
+          </div>
+        </div>
+        <div class="founder-accent"></div>
+      </div>
+      <div class="founder-content reveal">
+        <div class="section-eyebrow">Leadership</div>
+        <h2 class="founder-name">Fariba Hafezi</h2>
+        <div class="founder-title">President — Sweet Floret Sales & Consulting</div>
+        <p class="founder-bio">Fariba brings a rare combination of classical culinary training and commercial leadership to every client engagement. With a foundation built at Le Cordon Bleu Paris and extensive experience across research & development, retail education, and operational leadership, she has spent her career at the intersection of product excellence and business performance.</p>
+        <p class="founder-bio">Her work spans retail bakery, food manufacturing, and hospitality — giving her the breadth to understand both the craft demands and the commercial realities that food businesses navigate daily.</p>
+        <div class="founder-highlights">
+          <div class="founder-highlight">Classically trained — Le Cordon Bleu, Paris</div>
+          <div class="founder-highlight">Leadership in R&D, education, and operations</div>
+          <div class="founder-highlight">Cross-sector experience in retail, manufacturing & hospitality</div>
+          <div class="founder-highlight">Practical, execution-focused advisory approach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-eyebrow" style="justify-content:center;">How We Work</div>
+      <h2 class="section-headline">A Structured Path<br><em>From Discovery to Growth</em></h2>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">01</div>
+        </div>
+        <div class="step-title">Discovery</div>
+        <p class="step-desc">We begin with a deep-dive assessment of your business — operations, financials, product range, team, and market position — to understand exactly where the leverage points are.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">02</div>
+        </div>
+        <div class="step-title">Strategy</div>
+        <p class="step-desc">We develop a tailored roadmap with clear priorities, timelines, and measurable outcomes — aligned to your goals and resourced for your reality.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">03</div>
+        </div>
+        <div class="step-title">Implementation</div>
+        <p class="step-desc">We work alongside your team to execute — whether that means product development, team training, systems design, or sales infrastructure.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num-wrap">
+          <div class="step-num">04</div>
+        </div>
+        <div class="step-title">Momentum</div>
+        <p class="step-desc">We establish accountability structures and check-ins to ensure gains are sustained, adapted, and built upon as your business continues to evolve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Our Team</div>
+      <h2 class="section-headline">Senior Specialists,<br><em>Across Every Discipline</em></h2>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-bg p1"></div>
+          <div class="team-photo-initials">FH</div>
+          <div class="team-card-bio">
+            <p class="team-bio-text">Classically trained at Le Cordon Bleu Paris. Extensive leadership across R&D, retail education, and food business consulting. Deep expertise in product strategy and commercial growth.</p>
+          </div>
+        </div>
+        <div class="team-name">Fariba Hafezi</div>
+        <div class="team-role">President</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-bg p2"></div>
+          <div class="team-photo-initials">GG</div>
+          <div class="team-card-bio">
+            <p class="team-bio-text">Seasoned sales analyst with a track record in food and retail sectors. Specializes in revenue modelling, commercial planning, trade strategy, and data-driven performance management.</p>
+          </div>
+        </div>
+        <div class="team-name">Gordon Groening</div>
+        <div class="team-role">Sales Analyst Director</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-bg p3"></div>
+          <div class="team-photo-initials">HX</div>
+          <div class="team-card-bio">
+            <p class="team-bio-text">Food safety and quality systems expert with hands-on experience in audit readiness, HACCP compliance, regulatory documentation, labeling standards, and operational training programs.</p>
+          </div>
+        </div>
+        <div class="team-name">Helen Xie</div>
+        <div class="team-role">Food Safety & Quality Consultant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / TESTIMONIALS -->
+<section class="trust">
+  <div class="section-inner">
+    <div class="trust-inner reveal">
+      <div class="trust-label">Trusted across bakery, retail, and manufacturing</div>
+      <div class="gold-divider" style="margin:0 auto;"></div>
+    </div>
+    <div class="testimonials-grid reveal">
+      <div class="testimonial">
+        <p class="testimonial-text">Sweet Floret brought rigour to our product development process that we'd been missing for years. The results were immediate — and lasting.</p>
+        <div class="testimonial-author">
+          <strong>Sarah M.</strong>
+          Operations Director, Retail Bakery Group
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Their food safety framework gave us everything we needed to pass our third-party audit with confidence. Professional, thorough, and genuinely invested.</p>
+        <div class="testimonial-author">
+          <strong>James T.</strong>
+          General Manager, Food Manufacturing
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Working with Sweet Floret transformed how we approach our in-store bakery. Sales are up, waste is down, and our team has never been more aligned.</p>
+        <div class="testimonial-author">
+          <strong>Patricia L.</strong>
+          Category Director, Grocery Retail
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-inner">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="section-headline">Let's Build Something<br><em>Exceptional</em></h2>
+    <p class="final-cta-sub">Whether you're optimizing an existing operation or building something new, we'd like to understand your goals and explore how we can help.</p>
+    <a href="#contact" class="btn-primary"><span>Schedule a Consultation</span></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-eyebrow">Contact</div>
+        <h2 class="section-headline serif">Begin the<br><em>Conversation</em></h2>
+        <div class="gold-divider"></div>
+        <p class="why-body">We work with a select number of clients at any given time. Reach out to discuss your goals and determine whether an engagement makes sense.</p>
+        <div class="contact-details">
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">Location</span>
+            <span class="contact-detail-value">Vancouver, British Columbia</span>
+          </div>
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value">hello@sweetfloret.ca</span>
+          </div>
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">Phone</span>
+            <span class="contact-detail-value">+1 (604) 000-0000</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name">
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Business Email</label>
+          <input type="email" placeholder="you@yourbusiness.com">
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Company / Business</label>
+            <input type="text" placeholder="Your business name">
+          </div>
+          <div class="form-field">
+            <label>Industry</label>
+            <select>
+              <option value="" disabled selected>Select your sector</option>
+              <option>Retail Bakery</option>
+              <option>Grocery / In-Store Bakery</option>
+              <option>Food Manufacturing</option>
+              <option>Hospitality</option>
+              <option>Emerging Food Brand</option>
+              <option>Multi-Location Operation</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Area of Interest</label>
+          <select>
+            <option value="" disabled selected>What can we help with?</option>
+            <option>Sales Strategy & Commercial Planning</option>
+            <option>Product Innovation & Development</option>
+            <option>Operational Optimization</option>
+            <option>Food Safety & Quality</option>
+            <option>Multiple Areas</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Tell us briefly about your business and what you're looking to achieve…"></textarea>
+        </div>
+        <button onclick="alert('Thank you — we\'ll be in touch shortly.')" style="cursor:pointer; background:var(--espresso); color:var(--white); border:none; padding:1rem 2.5rem; font-family:\'DM Sans\',sans-serif; font-size:0.75rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; transition:background 0.3s ease;" onmouseover="this.style.background='#5A3143'" onmouseout="this.style.background='#2F241F'">Send Inquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Sweet <span>Floret</span></div>
+        <p class="footer-tagline">Strategy for businesses that want to grow beautifully.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Sales Strategy</a></li>
+          <li><a href="#services">Product Innovation</a></li>
+          <li><a href="#services">Operations</a></li>
+          <li><a href="#services">Food Safety</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-item"><a href="mailto:hello@sweetfloret.ca">hello@sweetfloret.ca</a></div>
+        <div class="footer-contact-item">Vancouver, BC, Canada</div>
+        <div class="footer-contact-item" style="margin-top:1.5rem;">
+          <a href="#contact" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; opacity:0.9;">Book a Consultation →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Sweet Floret Sales & Consulting. All rights reserved.</div>
+      <div class="footer-closer">Strategy for businesses that want to grow beautifully.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll behavior
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '1rem 5vw';
+      nav.style.boxShadow = '0 2px 30px rgba(47,36,31,0.08)';
+    } else {
+      nav.style.padding = '1.6rem 5vw';
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
