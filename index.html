@@ -1032,7 +1032,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem;
     font-weight: 400;
-    color: var(--ivory);
+    color: var(--espresso);
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
   }
@@ -1223,6 +1223,15 @@
     font-size: 0.9rem;
     color: var(--espresso);
     opacity: 0.75;
+  }
+
+  .email-link {
+      text-decoration: underline;
+      color: inherit;
+  }
+
+  .email-link:hover {
+      color: var(--gold);
   }
 
   /* Responsive */
@@ -1696,12 +1705,18 @@
             <span class="contact-detail-value">Vancouver, British Columbia</span>
           </div>
           <div class="contact-detail-item">
+              <span class="contact-detail-label">Address</span>
+              <span class="contact-detail-value">805-938 Howe St, V6Z 1N9</span>
+          </div>
+          <div class="contact-detail-item">
             <span class="contact-detail-label">Email</span>
-            <span class="contact-detail-value">hello@sweetfloret.ca</span>
+            <span class="contact-detail-value">
+                <a href="mailto:info@sweetfloret.ca">info@sweetfloret.ca</a>
+            </span>
           </div>
           <div class="contact-detail-item">
             <span class="contact-detail-label">Phone</span>
-            <span class="contact-detail-value">+1 (604) 000-0000</span>
+            <span class="contact-detail-value">+1 (604) 762-5631</span>
           </div>
         </div>
       </div>
@@ -1788,7 +1803,7 @@
       </div>
       <div>
         <div class="footer-col-title">Contact</div>
-        <div class="footer-contact-item"><a href="mailto:hello@sweetfloret.ca">hello@sweetfloret.ca</a></div>
+        <div class="footer-contact-item"><a href="mailto:info@sweetfloret.ca">info@sweetfloret.ca</a></div>
         <div class="footer-contact-item">Vancouver, BC, Canada</div>
         <div class="footer-contact-item" style="margin-top:1.5rem;">
           <a href="#contact" style="color:var(--gold); font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; opacity:0.9;">Book a Consultation →</a>
