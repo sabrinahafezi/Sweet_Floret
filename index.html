@@ -369,11 +369,18 @@
             .pillars-grid { grid-template-columns: 1fr; }
             .pillar-card { border-left: none; border-top: 1px solid rgba(184,144,90,0.2); }
             .pillar-card:first-child { border-top: none; }
-            .process-steps { grid-template-columns: 1fr; }
-            .process-step { padding: 0 0.5rem; }
+            .process-steps { grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; }
+            .process-step { padding: 2rem 1.5rem; border-bottom: 1px solid rgba(184,144,90,0.15); }
+            .process-step:last-child { border-bottom: none; }
             .step-num-wrap { justify-content: center; margin-bottom: 1.2rem; }
             .step-title { text-align: center; }
             .step-desc { text-align: center; }
+            .step-num { transition: none; }
+            .process-step:hover .step-num { background: var(--ivory); border-color: var(--taupe); color: var(--espresso); }
+            .step-title { transition: none; }
+            .process-step:hover .step-title { font-size: 1.5rem; color: var(--espresso); }
+            .step-desc { transition: none; }
+            .process-step:hover .step-desc { font-size: 0.85rem; opacity: 0.6; }
             .team-card { grid-template-columns: 1fr; }
             .team-photo { min-height: 280px; }
             .industries-grid { grid-template-columns: 1fr; }
