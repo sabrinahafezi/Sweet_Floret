@@ -167,7 +167,7 @@
         .partners-note { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--taupe); opacity: 0.8; }
 
         .final-cta { padding: 10rem 0; background: var(--espresso); text-align: center; position: relative; overflow: hidden; }
-        .final-cta::before { content: 'SF'; font-family: 'Cormorant Garamond', serif; font-size: 40vw; font-weight: 300; color: rgba(255,255,255,0.02); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; letter-spacing: -0.05em; white-space: nowrap; }
+        .final-cta::before { display: none; }
         .final-cta .section-eyebrow { justify-content: center; color: var(--gold); margin-bottom: 1.5rem; }
         .final-cta .section-eyebrow::before { display: none; }
         .final-cta .section-headline { color: var(--ivory); text-align: center; margin-bottom: 1.5rem; }
@@ -346,7 +346,8 @@
             .services-header { grid-template-columns: 1fr; }
             .process-steps { grid-template-columns: 1fr 1fr; }
             .process-steps::before { display: none; }
-            .team-card { grid-template-columns: 260px 1fr; }
+            .team-card { grid-template-columns: 1fr; }
+            .team-photo { display: none; }
             .footer-top { grid-template-columns: 1fr 1fr; }
             .industries-grid { grid-template-columns: 1fr 1fr; }
             .services-grid { grid-template-columns: 1fr; }
@@ -635,8 +636,8 @@
     <div class="footer-inner">
         <div class="footer-top">
             <div>
-                <div class="footer-logo-wrap" style="margin-bottom:1.2rem;">
-                    <img src="Sweet_Floret_Logo.png" alt="Sweet Floret" style="height:110px; width:auto;">
+                <div class="footer-logo-wrap" style="display:flex; align-items:center; justify-content:center; height:100%;">
+                    <img src="Sweet_Floret_Logo.png" alt="Sweet Floret" style="height:180px; width:auto;">
                 </div>
             </div>
             <div>
