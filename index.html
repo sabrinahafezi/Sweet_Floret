@@ -73,7 +73,7 @@
         .why { padding: 8rem 0; background: var(--cream); }
         .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: center; }
         .why-visual { position: relative; height: 560px; overflow: hidden; }
-        .why-visual-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #C9B49A 0%, #A8917A 40%, #8B7260 100%); }
+        .why-visual-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .why-content { padding-right: 2rem; }
         .why-body { font-size: 1rem; line-height: 1.85; color: var(--espresso); opacity: 0.8; margin-bottom: 1.5rem; }
         .why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(184, 167, 154, 0.3); }
@@ -121,6 +121,8 @@
         .founder-highlight { display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--espresso); opacity: 0.7; }
         .founder-highlight::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
         .process { padding: 8rem 0; background: var(--ivory); }
+        .process-image { width: 100%; height: 420px; overflow: hidden; margin-top: 4rem; position: relative; }
+        .process-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
         .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 5rem; position: relative; }
         .process-steps::before { content: ''; position: absolute; top: 2.2rem; left: 3rem; right: 3rem; height: 1px; background: linear-gradient(to right, var(--taupe), var(--gold), var(--taupe)); opacity: 0.4; }
         .process-step { padding: 0 2rem; padding-top: 0; }
@@ -435,7 +437,7 @@
 <section class="why" id="about">
     <div class="section-inner">
         <div class="why-grid">
-            <div class="why-visual reveal"><div class="why-visual-bg"></div></div>
+            <div class="why-visual reveal"><img src="Ingredients.png" alt="" class="why-visual-img"></div>
             <div class="why-content reveal">
                 <div class="section-eyebrow">Our Difference</div>
                 <h2 class="section-headline">Where Culinary Expertise Meets <em>Commercial Discipline</em></h2>
@@ -494,6 +496,9 @@
             <div class="section-eyebrow" style="justify-content:center;">How We Work</div>
             <h2 class="section-headline">A Structured Path<br><em>From Discovery to Growth</em></h2>
         </div>
+        <div class="process-image reveal">
+            <img src="Croissant.png" alt="Freshly baked croissant">
+        </div>
         <div class="process-steps reveal">
             <div class="process-step"><div class="step-num-wrap"><div class="step-num">01</div></div><div class="step-title">Discovery</div><p class="step-desc">We begin with a deep-dive assessment of your business — operations, financials, product range, team, and market position — to understand exactly where the leverage points are.</p></div>
             <div class="process-step"><div class="step-num-wrap"><div class="step-num">02</div></div><div class="step-title">Strategy</div><p class="step-desc">We develop a tailored roadmap with clear priorities, timelines, and measurable outcomes — aligned to your goals and resourced for your reality.</p></div>
@@ -527,8 +532,7 @@
             </div>
             <div class="team-card">
                 <div class="team-photo">
-                    <div class="team-photo-bg p2"></div>
-                    <div class="team-photo-initials">GG</div>
+                    <img src="Gordy_Headshot.png" alt="Gordon Groening" class="team-photo-img">
                 </div>
                 <div class="team-card-content">
                     <div class="team-name">Gordon Groening</div>
@@ -542,8 +546,7 @@
             </div>
             <div class="team-card">
                 <div class="team-photo">
-                    <div class="team-photo-bg p3"></div>
-                    <div class="team-photo-initials">HX</div>
+                    <img src="Helen_Headshot.png" alt="Helen Xie" class="team-photo-img">
                 </div>
                 <div class="team-card-content">
                     <div class="team-name">Helen Xie</div>
