@@ -136,6 +136,7 @@
         .team-card { background: var(--cream); display: grid; grid-template-columns: 260px 1fr; overflow: hidden; transition: background 0.3s ease; }
         .team-card:hover { background: var(--ivory); }
         .team-photo { position: relative; overflow: hidden; }
+        .team-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
         .team-photo-bg { position: absolute; inset: 0; }
         .team-photo-bg.p1 { background: linear-gradient(160deg, #C4A882 0%, #9C7E5C 60%, #7A5E44 100%); }
         .team-photo-bg.p2 { background: linear-gradient(160deg, #B8A8A0 0%, #8E7870 60%, #6A5450 100%); }
@@ -370,7 +371,7 @@
 <body>
 
 <nav>
-    <a href="#" class="nav-logo"><img src="sweet_floret_logo.png" alt="Sweet Floret" class="nav-logo-img"></a>
+    <a href="#" class="nav-logo"><img src="Sweet_Floret_Logo.png" alt="Sweet Floret" class="nav-logo-img"></a>
     <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -507,8 +508,7 @@
         <div class="team-list reveal">
             <div class="team-card">
                 <div class="team-photo">
-                    <div class="team-photo-bg p1"></div>
-                    <div class="team-photo-initials">FH</div>
+                    <img src="Fariba_Headshot.png" alt="Fariba Hafezi" class="team-photo-img">
                 </div>
                 <div class="team-card-content">
                     <div class="team-name">Fariba Hafezi</div>
@@ -628,7 +628,7 @@
         <div class="footer-top">
             <div>
                 <div class="footer-logo-wrap" style="margin-bottom:1.2rem;">
-                    <img src="sweet_floret_logo.png" alt="Sweet Floret" style="height:70px; width:auto; filter: brightness(0) invert(1) sepia(1) saturate(0.3) brightness(1.6); opacity:0.75;">
+                    <img src="Sweet_Floret_Logo.png" alt="Sweet Floret" style="height:70px; width:auto; filter: brightness(0) invert(1) sepia(1) saturate(0.3) brightness(1.6); opacity:0.75;">
                 </div>
                 <div class="footer-brand">Sweet Floret</div>
             </div>
