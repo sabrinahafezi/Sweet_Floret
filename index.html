@@ -72,13 +72,8 @@
         .pillars .section-headline { color: var(--ivory); }
         .why { padding: 8rem 0; background: var(--cream); }
         .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: center; }
-        .why-collage { position: relative; height: 600px; }
-        .collage-frame { position: absolute; overflow: hidden; }
-        .collage-main { left: 0; top: 0; width: 65%; height: 100%; z-index: 1; box-shadow: 0 24px 64px rgba(47,36,31,0.18); }
-        .collage-wheat { right: 0; top: 0; width: 44%; height: 50%; z-index: 2; box-shadow: 0 16px 48px rgba(47,36,31,0.15); }
-        .collage-blocks { right: 3%; bottom: 0; width: 47%; height: 52%; z-index: 3; box-shadow: 0 12px 40px rgba(47,36,31,0.15); }
-        .collage-img { position: absolute; top: -15%; left: 0; width: 100%; height: 130%; object-fit: cover; object-position: center; display: block; will-change: transform; }
-        .collage-gold-line { position: absolute; right: -1.2rem; top: 22%; width: 1px; height: 38%; background: linear-gradient(to bottom, transparent, var(--gold) 50%, transparent); opacity: 0.45; z-index: 4; pointer-events: none; }
+        .why-visual { position: relative; height: 560px; overflow: hidden; }
+        .why-visual-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .why-content { padding-right: 2rem; }
         .why-body { font-size: 1rem; line-height: 1.85; color: var(--espresso); opacity: 0.8; margin-bottom: 1.5rem; }
         .why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(184, 167, 154, 0.3); }
@@ -347,7 +342,7 @@
             .hero-content { padding: 8rem 5vw 5rem; }
             .pillars-grid { grid-template-columns: 1fr 1fr; }
             .why-grid, .founder-grid, .contact-grid { grid-template-columns: 1fr; }
-            .why-collage, .founder-image-wrap { display: none; }
+            .why-visual, .founder-image-wrap { display: none; }
             .services-header { grid-template-columns: 1fr; }
             .process-steps { grid-template-columns: 1fr 1fr; }
             .process-steps::before { display: none; }
@@ -442,18 +437,7 @@
 <section class="why" id="about">
     <div class="section-inner">
         <div class="why-grid">
-            <div class="why-collage reveal">
-                <div class="collage-frame collage-main">
-                    <img src="Ingredients.png" alt="Artisan ingredients" class="collage-img" data-parallax="0.12">
-                </div>
-                <div class="collage-frame collage-wheat">
-                    <img src="Wheat.png" alt="Wheat" class="collage-img" data-parallax="0.28">
-                </div>
-                <div class="collage-frame collage-blocks">
-                    <img src="Blocks.png" alt="Chocolate blocks" class="collage-img" data-parallax="0.20">
-                </div>
-                <div class="collage-gold-line"></div>
-            </div>
+            <div class="why-visual reveal"><img src="Ingredients.png" alt="" class="why-visual-img"></div>
             <div class="why-content reveal">
                 <div class="section-eyebrow">Our Difference</div>
                 <h2 class="section-headline">Where Culinary Expertise Meets <em>Commercial Discipline</em></h2>
@@ -652,9 +636,8 @@
         <div class="footer-top">
             <div>
                 <div class="footer-logo-wrap" style="margin-bottom:1.2rem;">
-                    <img src="Sweet_Floret_Logo.png" alt="Sweet Floret" style="height:70px; width:auto;">
+                    <img src="Sweet_Floret_Logo.png" alt="Sweet Floret" style="height:110px; width:auto;">
                 </div>
-                <div class="footer-brand">Sweet Floret</div>
             </div>
             <div>
                 <div class="footer-col-title">Navigation</div>
@@ -824,33 +807,6 @@
 
     updateCookiesParallax();
 
-    // ─── COLLAGE PARALLAX ───
-    const whySection = document.querySelector('.why');
-    const collageImgs = document.querySelectorAll('.collage-img');
-    let collageTicking = false;
-
-    function updateCollageParallax() {
-        if (!whySection || !collageImgs.length) return;
-        const rect = whySection.getBoundingClientRect();
-        const viewH = window.innerHeight;
-        if (rect.bottom < 0 || rect.top > viewH) return;
-        const progress = (viewH - rect.top) / (viewH + rect.height);
-        collageImgs.forEach(img => {
-            const speed = parseFloat(img.dataset.parallax) || 0.15;
-            const offset = (progress - 0.5) * speed * 280;
-            img.style.transform = `translateY(${offset}px)`;
-        });
-        collageTicking = false;
-    }
-
-    window.addEventListener('scroll', () => {
-        if (!collageTicking) {
-            requestAnimationFrame(updateCollageParallax);
-            collageTicking = true;
-        }
-    }, { passive: true });
-
-    updateCollageParallax();
 
 </script>
 </body>
