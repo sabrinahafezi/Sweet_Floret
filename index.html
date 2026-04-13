@@ -95,13 +95,14 @@
         .service-link { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--espresso); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; opacity: 0.6; transition: opacity 0.3s ease; }
         .service-link:hover { opacity: 1; }
         .service-arrow { transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0.5; }
-        .industries { padding: 8rem 0; background: var(--espresso); }
+        .industries { padding: 8rem 0; background: var(--espresso); position: relative; overflow: hidden; }
+        .industries-shapes { position: absolute; inset: 0; pointer-events: none; }
         .industries .section-eyebrow { color: var(--gold); }
         .industries .section-headline { color: var(--ivory); }
         .industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); margin-top: 4rem; }
         .industry-item { padding: 3rem 2.8rem; background: var(--espresso); display: flex; flex-direction: column; gap: 0; transition: background 0.35s ease; cursor: default; border-top: 2px solid transparent; position: relative; }
         .industry-item:hover { background: rgba(184, 144, 90, 0.08); border-top-color: var(--gold); }
-        .industry-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-weight: 400; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 1.4rem; opacity: 0.7; }
+        .industry-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 1.2rem; opacity: 0.75; line-height: 1; }
         .industry-name { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 500; color: var(--ivory); margin-bottom: 0.9rem; line-height: 1.15; }
         .industry-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(247, 242, 235, 0.62); }
         .founder { padding: 8rem 0; background: var(--cream); }
@@ -451,7 +452,7 @@
                 <p class="why-body">Most consulting firms understand business. Most culinary experts understand product. Sweet Floret operates at the intersection — bringing classically trained pastry expertise, sales leadership, food safety rigour, and operational experience to every engagement.</p>
                 <p class="why-body">We work with growth-oriented food businesses that want more than advice. They want a capable partner who has built teams, launched products, navigated compliance, and driven revenue across retail, manufacturing, and hospitality environments.</p>
                 <div class="why-stats">
-                    <div class="stat"><div class="stat-num" data-target="15" data-suffix="+">0</div><div class="stat-label">Years Industry Experience</div></div>
+                    <div class="stat"><div class="stat-num" data-target="100" data-suffix="+">0</div><div class="stat-label">Years of Combined Industry Experience</div></div>
                     <div class="stat"><div class="stat-num" data-target="4" data-suffix="">0</div><div class="stat-label">Core Disciplines</div></div>
                     <div class="stat"><div class="stat-num" data-target="6" data-suffix="">0</div><div class="stat-label">Industries Served</div></div>
                     <div class="stat"><div class="stat-num" data-target="3" data-suffix="">0</div><div class="stat-label">Senior Specialists</div></div>
@@ -480,6 +481,33 @@
 </section>
 
 <section class="industries" id="industries">
+    <div class="industries-shapes" aria-hidden="true">
+        <svg width="100%" height="100%" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <!-- Large concentric arcs — top right -->
+            <circle cx="1480" cy="-80" r="420" fill="none" stroke="#B8905A" stroke-width="1" opacity="0.14"/>
+            <circle cx="1480" cy="-80" r="310" fill="none" stroke="#B8905A" stroke-width="0.5" opacity="0.1"/>
+            <circle cx="1480" cy="-80" r="200" fill="none" stroke="#B8905A" stroke-width="0.5" opacity="0.08"/>
+            <!-- Large arc — bottom left -->
+            <circle cx="-60" cy="820" r="360" fill="none" stroke="#B8905A" stroke-width="1" opacity="0.12"/>
+            <circle cx="-60" cy="820" r="240" fill="none" stroke="#F7F2EB" stroke-width="0.5" opacity="0.05"/>
+            <!-- Dot grid — upper left -->
+            <circle cx="60" cy="90" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="84" cy="90" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="108" cy="90" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="60" cy="114" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="84" cy="114" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="108" cy="114" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="60" cy="138" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="84" cy="138" r="2" fill="#B8905A" opacity="0.3"/>
+            <circle cx="108" cy="138" r="2" fill="#B8905A" opacity="0.3"/>
+            <!-- Thin vertical accent line — right side -->
+            <line x1="1360" y1="180" x2="1360" y2="580" stroke="#B8905A" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="1360" cy="175" r="3" fill="none" stroke="#B8905A" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="1360" cy="585" r="3" fill="none" stroke="#B8905A" stroke-width="0.5" opacity="0.3"/>
+            <!-- Diamond accent — center bottom -->
+            <rect x="714" y="715" width="12" height="12" fill="none" stroke="#B8905A" stroke-width="0.75" opacity="0.25" transform="rotate(45 720 721)"/>
+        </svg>
+    </div>
     <div class="section-inner">
         <div class="reveal">
             <div class="section-eyebrow">Who We Serve</div>
@@ -487,9 +515,9 @@
         </div>
         <div class="industries-grid reveal">
             <div class="industry-item"><div class="industry-num">01</div><div class="industry-name">Retail Bakeries</div><p class="industry-desc">Independent and multi-location operations looking to scale sustainably with strong margins and consistent quality.</p></div>
-            <div class="industry-item"><div class="industry-num">02</div><div class="industry-name">In-Store Grocery Bakeries</div><p class="industry-desc">Supermarket and grocery bakery departments seeking product development, staff training, and sales strategy support.</p></div>
+            <div class="industry-item"><div class="industry-num">02</div><div class="industry-name">Grocery Bakeries and National Convenience Stores</div><p class="industry-desc">Supermarket and grocery bakery departments seeking product development, staff training, and sales strategy support.</p></div>
             <div class="industry-item"><div class="industry-num">03</div><div class="industry-name">Food Manufacturers</div><p class="industry-desc">Production-focused businesses navigating compliance, efficiency, and retail channel expansion.</p></div>
-            <div class="industry-item"><div class="industry-num">04</div><div class="industry-name">Hospitality Groups</div><p class="industry-desc">Hotels and resorts elevating their food programs through curated bakery concepts and operational structure.</p></div>
+            <div class="industry-item"><div class="industry-num">04</div><div class="industry-name">Hospitality Groups</div><p class="industry-desc">Restaurants and cafés elevating their food programs through curated bakery concepts and operational structure.</p></div>
             <div class="industry-item"><div class="industry-num">05</div><div class="industry-name">Emerging Food Brands</div><p class="industry-desc">Early-stage brands scaling from artisan to commercial with the right systems, strategy, and structure in place.</p></div>
             <div class="industry-item"><div class="industry-num">06</div><div class="industry-name">Multi-Location Operations</div><p class="industry-desc">Expanding chains requiring standardized processes, training frameworks, and cohesive quality control across sites.</p></div>
         </div>
@@ -627,7 +655,7 @@
                 <div class="form-field"><label>Business Email</label><input type="email" placeholder="you@yourbusiness.com"></div>
                 <div class="form-row">
                     <div class="form-field"><label>Company / Business</label><input type="text" placeholder="Your business name"></div>
-                    <div class="form-field"><label>Industry</label><select><option value="" disabled selected>Select your sector</option><option>Retail Bakery</option><option>Grocery / In-Store Bakery</option><option>Food Manufacturing</option><option>Hospitality</option><option>Emerging Food Brand</option><option>Multi-Location Operation</option></select></div>
+                    <div class="form-field"><label>Industry</label><select><option value="" disabled selected>Select your sector</option><option>Retail Bakery</option><option>Grocery / Bakery</option><option>Food Manufacturing</option><option>Hospitality</option><option>Emerging Food Brand</option><option>Multi-Location Operation</option></select></div>
                 </div>
                 <div class="form-field"><label>Area of Interest</label><select><option value="" disabled selected>What can we help with?</option><option>Sales Strategy & Commercial Planning</option><option>Product Innovation & Development</option><option>Operational Optimization</option><option>Food Safety & Quality</option><option>Multiple Areas</option></select></div>
                 <div class="form-field"><label>Message</label><textarea placeholder="Tell us briefly about your business and what you're looking to achieve…"></textarea></div>
