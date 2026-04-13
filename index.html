@@ -60,7 +60,7 @@
         .section-headline { font-size: clamp(2rem, 3.5vw, 3.8rem); font-weight: 300; line-height: 1.12; color: var(--espresso); margin-bottom: 1.5rem; }
         .section-headline em { font-style: italic; color: var(--plum); }
         .pillars { padding: 7rem 0; background: var(--espresso); position: relative; overflow: hidden; }
-        .pillars::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 60px; background: var(--ivory); clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%); }
+        .pillars::before { display: none; }
         .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4rem; }
         .pillar-card { padding: 3rem 2.5rem; border-left: 1px solid rgba(184, 144, 90, 0.2); position: relative; transition: background 0.4s ease; cursor: default; }
         .pillar-card:first-child { border-left: none; }
@@ -133,7 +133,7 @@
         /* TEAM - horizontal card layout */
         .team { padding: 8rem 0; background: var(--cream); }
         .team-list { display: flex; flex-direction: column; gap: 3px; margin-top: 4.5rem; background: rgba(184, 167, 154, 0.2); }
-        .team-card { background: var(--cream); display: grid; grid-template-columns: 260px 1fr; overflow: hidden; transition: background 0.3s ease; }
+        .team-card { background: var(--cream); display: grid; grid-template-columns: 320px 1fr; overflow: hidden; transition: background 0.3s ease; }
         .team-card:hover { background: var(--ivory); }
         .team-photo { position: relative; overflow: hidden; }
         .team-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
@@ -344,10 +344,15 @@
             .services-header { grid-template-columns: 1fr; }
             .process-steps { grid-template-columns: 1fr 1fr; }
             .process-steps::before { display: none; }
-            .team-card { grid-template-columns: 200px 1fr; }
+            .team-card { grid-template-columns: 260px 1fr; }
             .footer-top { grid-template-columns: 1fr 1fr; }
             .industries-grid { grid-template-columns: 1fr 1fr; }
             .services-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .team-card { grid-template-columns: 1fr; }
+            .team-photo { min-height: 300px; }
+            .team-card-content { padding: 2.5rem 2rem; }
         }
         @media (max-width: 640px) {
             .nav-links { display: none; }
@@ -357,7 +362,7 @@
             .pillar-card:first-child { border-top: none; }
             .process-steps { grid-template-columns: 1fr; }
             .team-card { grid-template-columns: 1fr; }
-            .team-photo { min-height: 220px; }
+            .team-photo { min-height: 280px; }
             .industries-grid { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
@@ -601,7 +606,7 @@
                 <div class="contact-details">
                     <div class="contact-detail-item"><span class="contact-detail-label">Location</span><span class="contact-detail-value">Vancouver, British Columbia</span></div>
                     <div class="contact-detail-item"><span class="contact-detail-label">Address</span><span class="contact-detail-value">805-938 Howe St, V6Z 1N9</span></div>
-                    <div class="contact-detail-item"><span class="contact-detail-label">Email</span><span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection#2b42454d446b585c4e4e5f4d4744594e5f05484a" class="email-link"><span class="__cf_email__" data-cfemail="3a53545c557a494d5f5f4e5c5655485f4e14595b">[email&#160;protected]</span></a></span></div>
+                    <div class="contact-detail-item"><span class="contact-detail-label">Email</span><span class="contact-detail-value"><a href="mailto:info@sweetfloret.ca" class="email-link">info@sweetfloret.ca</a></span></div>
                     <div class="contact-detail-item"><span class="contact-detail-label">Phone</span><span class="contact-detail-value">+1 (604) 762-5631</span></div>
                 </div>
             </div>
@@ -653,7 +658,7 @@
             </div>
             <div>
                 <div class="footer-col-title">Contact</div>
-                <div class="footer-contact-item"><a href="/cdn-cgi/l/email-protection#81e8efe7eec1f2f6e4e4f5e7edeef3e4f5afe2e0"><span class="__cf_email__" data-cfemail="89e0e7efe6c9fafeececfdefe5e6fbecfda7eae8">[email&#160;protected]</span></a></div>
+                <div class="footer-contact-item"><a href="mailto:info@sweetfloret.ca">info@sweetfloret.ca</a></div>
                 <div class="footer-contact-item">Vancouver, BC, Canada</div>
                 <div class="footer-contact-item" style="margin-top:1.5rem;"><a href="#contact" style="color:var(--gold);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;opacity:0.85;border-bottom:1px solid rgba(184,144,90,0.3);padding-bottom:2px;">Book a Consultation →</a></div>
             </div>
@@ -667,7 +672,7 @@
 
 <a href="#contact" class="sticky-cta" id="stickyCta">Book a Consultation</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
