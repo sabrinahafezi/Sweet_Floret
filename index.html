@@ -99,11 +99,11 @@
         .industries .section-eyebrow { color: var(--gold); }
         .industries .section-headline { color: var(--ivory); }
         .industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); margin-top: 4rem; }
-        .industry-item { padding: 2.5rem; background: var(--espresso); display: flex; align-items: flex-start; gap: 1.5rem; transition: background 0.3s ease; cursor: default; }
-        .industry-item:hover { background: rgba(184, 144, 90, 0.1); }
-        .industry-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 0.55rem; flex-shrink: 0; }
-        .industry-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--ivory); margin-bottom: 0.4rem; }
-        .industry-desc { font-size: 0.8rem; line-height: 1.6; color: rgba(247, 242, 235, 0.45); }
+        .industry-item { padding: 3rem 2.8rem; background: var(--espresso); display: flex; flex-direction: column; gap: 0; transition: background 0.35s ease; cursor: default; border-top: 2px solid transparent; position: relative; }
+        .industry-item:hover { background: rgba(184, 144, 90, 0.08); border-top-color: var(--gold); }
+        .industry-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-weight: 400; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 1.4rem; opacity: 0.7; }
+        .industry-name { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 500; color: var(--ivory); margin-bottom: 0.9rem; line-height: 1.15; }
+        .industry-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(247, 242, 235, 0.62); }
         .founder { padding: 8rem 0; background: var(--cream); }
         .founder-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 8vw; align-items: center; }
         .founder-image-wrap { position: relative; }
@@ -129,8 +129,10 @@
         .step-num-wrap { display: flex; align-items: center; margin-bottom: 2rem; }
         .step-num { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--taupe); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--espresso); background: var(--ivory); flex-shrink: 0; position: relative; z-index: 1; transition: all 0.3s ease; }
         .process-step:hover .step-num { background: var(--plum); border-color: var(--plum); color: var(--white); }
-        .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--espresso); margin-bottom: 0.8rem; }
-        .step-desc { font-size: 0.85rem; line-height: 1.75; color: var(--espresso); opacity: 0.6; }
+        .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--espresso); margin-bottom: 0.8rem; transition: font-size 0.3s ease, color 0.3s ease; }
+        .process-step:hover .step-title { font-size: 1.72rem; color: var(--plum); }
+        .step-desc { font-size: 0.85rem; line-height: 1.75; color: var(--espresso); opacity: 0.6; transition: font-size 0.3s ease, opacity 0.3s ease; }
+        .process-step:hover .step-desc { font-size: 0.95rem; opacity: 0.8; }
 
         /* TEAM - horizontal card layout */
         .team { padding: 8rem 0; background: var(--cream); }
@@ -212,6 +214,9 @@
         /* Fix: email link in contact never turns purple */
         .email-link, .email-link:visited, .email-link:active { color: var(--espresso); text-decoration: underline; }
         .email-link:hover { color: var(--gold); }
+        /* Phone link — matches surrounding text, never changes color after click */
+        .phone-link, .phone-link:visited, .phone-link:active { color: inherit; text-decoration: none; }
+        .phone-link:hover { color: var(--gold); text-decoration: underline; }
 
         /* ─── HAMBURGER MENU ─── */
         .hamburger {
@@ -481,12 +486,12 @@
             <h2 class="section-headline">Built for the<br><em>Food Industry</em></h2>
         </div>
         <div class="industries-grid reveal">
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">Retail Bakeries</div><p class="industry-desc">Independent and multi-location operations looking to scale sustainably with strong margins and consistent quality.</p></div></div>
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">In-Store Grocery Bakeries</div><p class="industry-desc">Supermarket and grocery bakery departments seeking product development, staff training, and sales strategy support.</p></div></div>
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">Food Manufacturers</div><p class="industry-desc">Production-focused businesses navigating compliance, efficiency, and retail channel expansion.</p></div></div>
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">Hospitality Groups</div><p class="industry-desc">Hotels and resorts elevating their food programs through curated bakery concepts and operational structure.</p></div></div>
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">Emerging Food Brands</div><p class="industry-desc">Early-stage brands scaling from artisan to commercial with the right systems, strategy, and structure in place.</p></div></div>
-            <div class="industry-item"><div class="industry-dot"></div><div><div class="industry-name">Multi-Location Operations</div><p class="industry-desc">Expanding chains requiring standardized processes, training frameworks, and cohesive quality control across sites.</p></div></div>
+            <div class="industry-item"><div class="industry-num">01</div><div class="industry-name">Retail Bakeries</div><p class="industry-desc">Independent and multi-location operations looking to scale sustainably with strong margins and consistent quality.</p></div>
+            <div class="industry-item"><div class="industry-num">02</div><div class="industry-name">In-Store Grocery Bakeries</div><p class="industry-desc">Supermarket and grocery bakery departments seeking product development, staff training, and sales strategy support.</p></div>
+            <div class="industry-item"><div class="industry-num">03</div><div class="industry-name">Food Manufacturers</div><p class="industry-desc">Production-focused businesses navigating compliance, efficiency, and retail channel expansion.</p></div>
+            <div class="industry-item"><div class="industry-num">04</div><div class="industry-name">Hospitality Groups</div><p class="industry-desc">Hotels and resorts elevating their food programs through curated bakery concepts and operational structure.</p></div>
+            <div class="industry-item"><div class="industry-num">05</div><div class="industry-name">Emerging Food Brands</div><p class="industry-desc">Early-stage brands scaling from artisan to commercial with the right systems, strategy, and structure in place.</p></div>
+            <div class="industry-item"><div class="industry-num">06</div><div class="industry-name">Multi-Location Operations</div><p class="industry-desc">Expanding chains requiring standardized processes, training frameworks, and cohesive quality control across sites.</p></div>
         </div>
     </div>
 </section>
@@ -611,7 +616,7 @@
                     <div class="contact-detail-item"><span class="contact-detail-label">Location</span><span class="contact-detail-value">Vancouver, British Columbia</span></div>
                     <div class="contact-detail-item"><span class="contact-detail-label">Address</span><span class="contact-detail-value">805-938 Howe St, V6Z 1N9</span></div>
                     <div class="contact-detail-item"><span class="contact-detail-label">Email</span><span class="contact-detail-value"><a href="mailto:info@sweetfloret.ca" class="email-link">info@sweetfloret.ca</a></span></div>
-                    <div class="contact-detail-item"><span class="contact-detail-label">Phone</span><span class="contact-detail-value">+1 (604) 762-5631</span></div>
+                    <div class="contact-detail-item"><span class="contact-detail-label">Phone</span><span class="contact-detail-value"><a href="tel:+16047625631" class="phone-link">+1 (604) 762-5631</a></span></div>
                 </div>
             </div>
             <div class="contact-form reveal">
