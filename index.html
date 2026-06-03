@@ -612,21 +612,23 @@
             <div class="section-eyebrow">Partners</div>
             <h2 class="section-headline">Our <em>Partners List</em></h2>
             <p class="partners-subtitle">Sign up with your email to receive a PDF of our partners</p>
-            <div class="partners-form">
+            <form class="partners-form" id="partners-form" name="partners" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="partners">
                 <div class="form-field">
                     <label>First Name</label>
-                    <input type="text" placeholder="Your first name">
+                    <input type="text" name="first-name" placeholder="Your first name">
                 </div>
                 <div class="form-field">
                     <label>Last Name</label>
-                    <input type="text" placeholder="Your last name">
+                    <input type="text" name="last-name" placeholder="Your last name">
                 </div>
                 <div class="form-field">
                     <label>Email Address</label>
-                    <input type="email" placeholder="you@yourbusiness.com">
+                    <input type="email" name="email" placeholder="you@yourbusiness.com" required>
                 </div>
-                <button class="partners-submit" onclick="alert('Thank you — we\'ll send our partners list to your inbox shortly.')">Submit</button>
-            </div>
+                <button type="submit" class="partners-submit">Submit</button>
+            </form>
+            <p id="partners-success" style="display:none;color:var(--espresso);font-size:0.9rem;margin-top:1rem;">Thank you — we'll send our partners list to your inbox shortly.</p>
             <p class="partners-note">We respect your privacy. Your information will never be shared with third parties.</p>
         </div>
     </div>
@@ -656,20 +658,24 @@
                     <div class="contact-detail-item"><span class="contact-detail-label">Phone</span><span class="contact-detail-value"><a href="tel:+16047625631" class="phone-link">+1 (604) 762-5631</a></span></div>
                 </div>
             </div>
-            <div class="contact-form reveal">
+            <form class="contact-form reveal" id="contact-form" name="contact" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="contact">
                 <div class="form-row">
-                    <div class="form-field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
-                    <div class="form-field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+                    <div class="form-field"><label>First Name</label><input type="text" name="first-name" placeholder="Your first name" required></div>
+                    <div class="form-field"><label>Last Name</label><input type="text" name="last-name" placeholder="Your last name" required></div>
                 </div>
-                <div class="form-field"><label>Business Email</label><input type="email" placeholder="you@yourbusiness.com"></div>
+                <div class="form-field"><label>Business Email</label><input type="email" name="email" placeholder="you@yourbusiness.com" required></div>
                 <div class="form-row">
-                    <div class="form-field"><label>Company / Business</label><input type="text" placeholder="Your business name"></div>
-                    <div class="form-field"><label>Industry</label><select><option value="" disabled selected>Select your sector</option><option>Retail Bakery</option><option>Grocery / Bakery</option><option>Food Manufacturing</option><option>Hospitality</option><option>Emerging Food Brand</option><option>Multi-Location Operation</option></select></div>
+                    <div class="form-field"><label>Company / Business</label><input type="text" name="company" placeholder="Your business name"></div>
+                    <div class="form-field"><label>Industry</label><select name="industry"><option value="" disabled selected>Select your sector</option><option>Retail Bakery</option><option>Grocery / Bakery</option><option>Food Manufacturing</option><option>Hospitality</option><option>Emerging Food Brand</option><option>Multi-Location Operation</option></select></div>
                 </div>
-                <div class="form-field"><label>Area of Interest</label><select><option value="" disabled selected>What can we help with?</option><option>Sales Strategy & Commercial Planning</option><option>Product Innovation & Development</option><option>Operational Optimization</option><option>Food Safety & Quality</option><option>Multiple Areas</option></select></div>
-                <div class="form-field"><label>Message</label><textarea placeholder="Tell us briefly about your business and what you're looking to achieve…"></textarea></div>
-                <button onclick="alert('Thank you — we\'ll be in touch shortly.')" style="cursor:pointer;background:var(--espresso);color:var(--white);border:none;padding:1rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;transition:background 0.3s ease;" onmouseover="this.style.background='#5A3143'" onmouseout="this.style.background='#2F241F'">Send Inquiry</button>
-            </div>
+                <div class="form-field"><label>Area of Interest</label><select name="area-of-interest"><option value="" disabled selected>What can we help with?</option><option>Sales Strategy & Commercial Planning</option><option>Product Innovation & Development</option><option>Operational Optimization</option><option>Food Safety & Quality</option><option>Multiple Areas</option></select></div>
+                <div class="form-field"><label>Message</label><textarea name="message" placeholder="Tell us briefly about your business and what you're looking to achieve…"></textarea></div>
+                <div>
+                    <button type="submit" style="cursor:pointer;background:var(--espresso);color:var(--white);border:none;padding:1rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;transition:background 0.3s ease;" onmouseover="this.style.background='#5A3143'" onmouseout="this.style.background='#2F241F'">Send Inquiry</button>
+                    <p id="contact-success" style="display:none;color:var(--espresso);font-size:0.9rem;margin-top:1rem;">Thank you — we'll be in touch shortly.</p>
+                </div>
+            </form>
         </div>
     </div>
 </section>
@@ -850,6 +856,30 @@
 
     updateCookiesParallax();
 
+    // ─── NETLIFY FORM SUBMISSIONS ───
+    function handleNetlifyForm(formId, successId) {
+        const form = document.getElementById(formId);
+        const success = document.getElementById(successId);
+        if (!form) return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                form.reset();
+                if (success) success.style.display = 'block';
+            })
+            .catch(() => {
+                alert('Something went wrong. Please try again or email us directly at info@sweetfloret.ca');
+            });
+        });
+    }
+
+    handleNetlifyForm('contact-form', 'contact-success');
+    handleNetlifyForm('partners-form', 'partners-success');
 
 </script>
 </body>
